@@ -1,0 +1,17 @@
+---
+all:
+  children:
+    network_devices:
+      children:
+        cisco:
+          hosts:
+            router01:
+              ansible_host: 192.168.51.2
+              hostname: RT-C1841
+    linux_servers:
+      children:
+        debian_family:
+          hosts:
+            raspi01:
+              ansible_host: 192.168.51.3
+              hostname: raspi-4
