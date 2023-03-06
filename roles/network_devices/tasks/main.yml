@@ -1,0 +1,42 @@
+---
+- name: basic system configuration
+  cisco.ios.ios_system:
+    hostname: RT-C1841
+    domain_name:
+      - kamiya.local
+    lookup_enabled: false
+    state: present
+
+- name: service configuration
+  cisco.ios.ios_config:
+    lines:
+      - version 15.1
+      - service config
+      - service timestamps debug datetime msec localtime show-timezone
+      - service timestamps log datetime msec localtime show-timezone
+      - service password-encryption
+
+# なぜか毎回changedになる
+- name: basic interface configuration
+  cisco.ios.ios_interfaces:
+    config:
+      - name: FastEthernet0/0
+        description: Connected to Internet
+        enabled: true
+        duplex: auto
+        speed: auto
+      - name: FastEthernet0/1
+        enabled: false
+      - name: Serial0/0/0
+        enabled: false
+      - name: Serial0/0/1
+        enabled: false
+    state: merged
+
+- name: L3 interface configuration
+  cisco.ios.ios_l3_interfaces:
+    config:
+      - name: FastEthernet0/0
+        ipv4:
+          - address: 192.168.51.2/24
+    state: merged

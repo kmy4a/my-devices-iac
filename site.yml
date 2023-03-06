@@ -1,6 +1,2 @@
 ---
-- hosts: all
-  gather_facts: false
-  tasks:
-    - name: ping
-      ansible.builtin.ping:
+- ansible.builtin.import_playbook:  network_devices.yml

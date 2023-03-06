@@ -1,0 +1,4 @@
+---
+- hosts: network_devices
+  roles:
+    - network_devices
