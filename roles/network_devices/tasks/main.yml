@@ -50,7 +50,7 @@
   cisco.ios.ios_config:
     lines: []
     parents:
-      - line con 0
+      - line aux 0
 
 - name: line configuration - vty
   cisco.ios.ios_config:
