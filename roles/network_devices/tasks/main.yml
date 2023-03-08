@@ -2,21 +2,17 @@
 - name: basic system configuration
   cisco.ios.ios_system:
     hostname: RT-C1841
-    domain_name:
-      - kamiya.local
+    domain_name: kamiya.local
     lookup_enabled: false
     state: present
 
 - name: service configuration
   cisco.ios.ios_config:
     lines:
-      - version 15.1
-      - service config
       - service timestamps debug datetime msec localtime show-timezone
       - service timestamps log datetime msec localtime show-timezone
       - service password-encryption
 
-# なぜか毎回changedになる
 - name: basic interface configuration
   cisco.ios.ios_interfaces:
     config:
@@ -32,6 +28,7 @@
       - name: Serial0/0/1
         enabled: false
     state: merged
+  changed_when: false  # なぜか毎回changedになるため
 
 - name: L3 interface configuration
   cisco.ios.ios_l3_interfaces:
@@ -40,3 +37,93 @@
         ipv4:
           - address: 192.168.51.2/24
     state: merged
+
+- name: line configuration - console
+  cisco.ios.ios_config:
+    lines:
+      - exec-timeout 0 0
+      - logging synchronous
+    parents:
+      - line con 0
+
+- name: line configuration - aux
+  cisco.ios.ios_config:
+    lines: []
+    parents:
+      - line con 0
+
+- name: line configuration - vty
+  cisco.ios.ios_config:
+    lines:
+      - exec-timeout 0 0
+      - logging synchronous
+      - transport input ssh
+    parents:
+      - line vty 0 4
+
+- name: clock configuration - timezone
+  cisco.ios.ios_config:
+    lines:
+      - clock timezone JST 9 0
+
+- name: clock configuration - ntp
+  cisco.ios.ios_ntp:
+    server: 133.243.238.164
+    logging: false
+    state: present
+
+- name: archive configuration
+  cisco.ios.ios_config:
+    lines:
+      - path tftp://192.168.51.10/$h-$t.cfg
+      - write-memory
+    parents:
+      - archive
+
+- name: logging configuration - remote logging
+  cisco.ios.ios_logging:
+    dest: host
+    name: 192.168.51.10
+    facility: local0
+    state: present
+  changed_when: false  # なぜか毎回changedになるため
+
+- name: logging configuration - console logging
+  cisco.ios.ios_logging:
+    dest: console
+    state: absent
+
+- name: snmp configuration
+  cisco.ios.ios_config:
+    lines:
+      - snmp-server community public RO
+
+- name: routing configuration - default route
+  cisco.ios.ios_static_routes:
+    config:
+      - address_families:
+          - afi: ipv4
+            routes:
+            - dest: 0.0.0.0/0
+              next_hops:
+                - forward_router_address: 192.168.51.254
+    state: merged
+
+- name: security configuration - disable http server
+  cisco.ios.ios_config:
+    lines:
+      - no ip http server
+      - no ip http secure-server
+
+- name: security configuration - disable SSHv1
+  cisco.ios.ios_config:
+    lines:
+      - ip ssh version 2
+
+- name: security configuration - AAA
+  cisco.ios.ios_config:
+    lines:
+      - aaa new-model
+      - aaa authentication login default local
+      - aaa authorization console
+      - aaa authorization exec default local 
