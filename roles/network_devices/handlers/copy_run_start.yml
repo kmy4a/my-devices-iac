@@ -1,0 +1,4 @@
+---
+- name: copy_run_start
+  cisco.ios.ios_config:
+    save_when: always
