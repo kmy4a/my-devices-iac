@@ -1,0 +1,23 @@
+---
+- name: basic interface - FastEthernet
+  cisco.ios.ios_interfaces:
+    config:
+      - name: "{{ item.name }}"
+        description: "{{ item.description }}"
+        enabled: "{{ item.enabled }}"
+        duplex: "{{ item.duplex }}"
+        speed: "{{ item.speed }}"
+    state: merged
+  with_items: "{{ FE_interfaces }}"
+  notify: copy_run_start
+
+- name: basic interface - Serial
+  cisco.ios.ios_interfaces:
+    config:
+      - name: "{{ item.name }}"
+        description: "{{ item.description }}"
+        enabled: "{{ item.enabled }}"
+    state: merged
+  with_items: "{{ SE_interfaces }}"
+  notify: copy_run_start
+  changed_when: false # なぜか毎回changedになるため

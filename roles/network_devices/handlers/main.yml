@@ -1,0 +1,3 @@
+---
+- ansible.builtin.import_tasks:
+    file: copy_run_start.yml

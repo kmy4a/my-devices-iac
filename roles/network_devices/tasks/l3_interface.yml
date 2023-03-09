@@ -1,0 +1,10 @@
+---
+- name: l3 interface
+  cisco.ios.ios_l3_interfaces:
+    config:
+      - name: "{{ item.name }}"
+        ipv4:
+          - address: "{{ item.ipv4_address }}"
+    state: merged
+  with_items: "{{ L3_interfaces }}"
+  notify: copy_run_start

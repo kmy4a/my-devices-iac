@@ -1,0 +1,9 @@
+---
+- name: archive - tftp
+  cisco.ios.ios_config:
+    lines:
+      - "path tftp://{{ tftp_server }}/$h-$t.cfg"
+      - write-memory
+    parents:
+      - archive
+  notify: copy_run_start

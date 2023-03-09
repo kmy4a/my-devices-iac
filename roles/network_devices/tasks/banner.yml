@@ -1,0 +1,8 @@
+---
+- name: banner - login
+  cisco.ios.ios_banner:
+    banner: login
+    text: "{{ banner_text }}"
+    state: present
+  notify: copy_run_start
+  changed_when: false # なぜか毎回changedになるため

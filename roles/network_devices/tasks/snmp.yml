@@ -1,0 +1,6 @@
+---
+- name: snmp
+  cisco.ios.ios_config:
+    lines:
+      - "snmp-server community {{ snmp_community }} RO"
+  notify: copy_run_start

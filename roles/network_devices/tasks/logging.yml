@@ -1,0 +1,15 @@
+---
+- name: logging - remote logging
+  cisco.ios.ios_logging:
+    dest: host
+    name: "{{ syslog_server }}"
+    facility: "{{ syslog_facility }}"
+    state: present
+  notify: copy_run_start
+  changed_when: false  # なぜか毎回changedになるため
+
+- name: logging - console logging
+  cisco.ios.ios_logging:
+    dest: console
+    state: absent
+  notify: copy_run_start
