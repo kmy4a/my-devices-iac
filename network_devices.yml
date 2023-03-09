@@ -1,4 +1,5 @@
 ---
 - hosts: network_devices
   roles:
-    - network_devices
+    - role: network_devices
+      tags: network_devices
