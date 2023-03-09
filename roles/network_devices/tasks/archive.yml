@@ -7,3 +7,4 @@
     parents:
       - archive
   notify: copy_run_start
+  tags: archive

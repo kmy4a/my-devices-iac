@@ -5,12 +5,14 @@
       - no ip http server
       - no ip http secure-server
   notify: copy_run_start
+  tags: security
 
 - name: security - disable SSHv1
   cisco.ios.ios_config:
     lines:
       - ip ssh version 2
   notify: copy_run_start
+  tags: security
 
 - name: security - AAA
   cisco.ios.ios_config:
@@ -20,3 +22,4 @@
       - aaa authorization console
       - aaa authorization exec default local
   notify: copy_run_start
+  tags: security

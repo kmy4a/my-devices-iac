@@ -6,3 +6,4 @@
       - service timestamps log datetime msec localtime show-timezone
       - service password-encryption
   notify: copy_run_start
+  tags: service

@@ -4,3 +4,4 @@
     lines:
       - "snmp-server community {{ snmp_community }} RO"
   notify: copy_run_start
+  tags: snmp

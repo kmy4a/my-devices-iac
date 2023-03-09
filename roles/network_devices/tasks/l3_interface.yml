@@ -8,3 +8,4 @@
     state: merged
   with_items: "{{ L3_interfaces }}"
   notify: copy_run_start
+  tags: l3_interface

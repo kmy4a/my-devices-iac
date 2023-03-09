@@ -1,25 +1,37 @@
 ---
 - ansible.builtin.import_tasks:
     file: basic.yml
+  tags: basic
 - ansible.builtin.import_tasks:
     file: service.yml
+  tags: service
 - ansible.builtin.import_tasks:
     file: basic_interface.yml
+  tags: basic_interface
 - ansible.builtin.import_tasks:
     file: l3_interface.yml
+  tags: l3_interface
 - ansible.builtin.import_tasks:
     file: line.yml
+  tags: line
 - ansible.builtin.import_tasks:
     file: clock.yml
+  tags: clock
 - ansible.builtin.import_tasks:
     file: archive.yml
+  tags: archive
 - ansible.builtin.import_tasks:
     file: logging.yml
+  tags: logging
 - ansible.builtin.import_tasks:
     file: snmp.yml
+  tags: snmp
 - ansible.builtin.import_tasks:
     file: routing.yml
+  tags: routing
 - ansible.builtin.import_tasks:
     file: security.yml
+  tags: security
 - ansible.builtin.import_tasks:
     file: banner.yml
+  tags: banner

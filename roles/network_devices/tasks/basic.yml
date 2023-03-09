@@ -6,3 +6,4 @@
     lookup_enabled: false
     state: present
   notify: copy_run_start
+  tags: basic

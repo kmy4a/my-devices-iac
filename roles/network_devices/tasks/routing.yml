@@ -10,3 +10,4 @@
                 - forward_router_address: "{{ next_hop_router }}"
     state: merged
   notify: copy_run_start
+  tags: routing

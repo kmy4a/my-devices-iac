@@ -4,6 +4,7 @@
     lines:
       - clock timezone JST 9 0
   notify: copy_run_start
+  tags: clock
 
 - name: clock - ntp
   cisco.ios.ios_ntp:
@@ -11,3 +12,4 @@
     logging: false
     state: present
   notify: copy_run_start
+  tags: clock

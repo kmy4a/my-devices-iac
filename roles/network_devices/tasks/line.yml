@@ -7,6 +7,7 @@
     parents:
       - line con 0
   notify: copy_run_start
+  tags: line
 
 - name: line - aux
   cisco.ios.ios_config:
@@ -14,6 +15,7 @@
     parents:
       - line aux 0
   notify: copy_run_start
+  tags: line
 
 - name: line - vty
   cisco.ios.ios_config:
@@ -24,3 +26,4 @@
     parents:
       - line vty 0 4
   notify: copy_run_start
+  tags: line

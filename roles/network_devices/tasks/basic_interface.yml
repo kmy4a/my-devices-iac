@@ -21,3 +21,4 @@
   with_items: "{{ SE_interfaces }}"
   notify: copy_run_start
   changed_when: false # なぜか毎回changedになるため
+  tags: basic_interface
