@@ -1,9 +1,9 @@
 ---
-- name: basic
+- name: cisco - basic
   cisco.ios.ios_system:
     hostname: "{{ hostname }}"
     domain_name: "{{ domain_name }}"
     lookup_enabled: false
     state: present
   notify: copy_run_start
-  tags: basic
+  when: inventory_hostname in groups["cisco"]

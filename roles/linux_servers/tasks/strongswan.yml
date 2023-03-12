@@ -1,0 +1,21 @@
+---
+- name: strongswan - /etc/ipsec.conf
+  ansible.builtin.template:
+    src: ipsec.conf.j2
+    dest: /etc/ipsec.conf
+  notify: strongswan
+
+- name: strongswan - /etc/ipsec.secrets
+  ansible.builtin.template:
+    src: ipsec.secrets.j2
+    dest: /etc/ipsec.secrets
+  notify: strongswan
+
+- name: strongswan - secrets permission
+  ansible.builtin.file:
+    path: /etc/ipsec.secrets
+    owner: root
+    group: root
+    mode: "600"
+    state: file
+  notify: strongswan

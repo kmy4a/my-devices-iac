@@ -1,5 +1,5 @@
 ---
-- name: routing - default route
+- name: cisco - routing - default route
   cisco.ios.ios_static_routes:
     config:
       - address_families:
@@ -10,4 +10,4 @@
                 - forward_router_address: "{{ next_hop_router }}"
     state: merged
   notify: copy_run_start
-  tags: routing
+  when: inventory_hostname in groups["cisco"]

@@ -1,9 +1,9 @@
 ---
-- name: banner - login
+- name: cisco - banner - login
   cisco.ios.ios_banner:
     banner: login
     text: "{{ banner_text }}"
     state: present
   notify: copy_run_start
+  when: inventory_hostname in groups["cisco"]
   changed_when: false # なぜか毎回changedになるため
-  tags: banner

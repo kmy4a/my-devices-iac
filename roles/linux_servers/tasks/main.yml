@@ -1,0 +1,17 @@
+---
+- name: configure vpn_servers
+  block:
+    - ansible.builtin.import_tasks:
+        file: install.yml
+      tags: install
+    - ansible.builtin.import_tasks:
+        file: sysctl.yml
+      tags: sysctl
+    - ansible.builtin.import_tasks:
+        file: strongswan.yml
+      tags: strongswan
+    - ansible.builtin.import_tasks:
+        file: nftables.yml
+      tags: nftables
+  when: inventory_hostname in groups["vpn_servers"]
+  tags: vpn_servers

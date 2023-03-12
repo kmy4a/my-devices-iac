@@ -3,3 +3,4 @@
   roles:
     - role: network_devices
       tags: network_devices
+  ignore_errors: yes

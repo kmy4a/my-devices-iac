@@ -1,7 +1,7 @@
 ---
-- name: snmp
+- name: cisco - snmp
   cisco.ios.ios_config:
     lines:
       - "snmp-server community {{ snmp_community }} RO"
   notify: copy_run_start
-  tags: snmp
+  when: inventory_hostname in groups["cisco"]

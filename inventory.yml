@@ -10,7 +10,7 @@ all:
               hostname: RT-C1841
     linux_servers:
       children:
-        debian_family:
+        vpn_servers:
           hosts:
             raspi01:
               ansible_host: 192.168.51.3

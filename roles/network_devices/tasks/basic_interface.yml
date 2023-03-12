@@ -1,5 +1,5 @@
 ---
-- name: basic interface - FastEthernet
+- name: cisco - basic interface - FastEthernet
   cisco.ios.ios_interfaces:
     config:
       - name: "{{ item.name }}"
@@ -9,9 +9,10 @@
         speed: "{{ item.speed }}"
     state: merged
   with_items: "{{ FE_interfaces }}"
+  when: inventory_hostname in groups["cisco"]
   notify: copy_run_start
 
-- name: basic interface - Serial
+- name: cisco - basic interface - Serial
   cisco.ios.ios_interfaces:
     config:
       - name: "{{ item.name }}"
@@ -20,5 +21,5 @@
     state: merged
   with_items: "{{ SE_interfaces }}"
   notify: copy_run_start
+  when: inventory_hostname in groups["cisco"]
   changed_when: false # なぜか毎回changedになるため
-  tags: basic_interface

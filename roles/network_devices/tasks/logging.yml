@@ -1,17 +1,17 @@
 ---
-- name: logging - remote logging
+- name: cisco - logging - remote logging
   cisco.ios.ios_logging:
     dest: host
     name: "{{ syslog_server }}"
     facility: "{{ syslog_facility }}"
     state: present
   notify: copy_run_start
+  when: inventory_hostname in groups["cisco"]
   changed_when: false  # なぜか毎回changedになるため
-  tags: logging
 
-- name: logging - console logging
+- name: cisco - logging - console logging
   cisco.ios.ios_logging:
     dest: console
     state: absent
   notify: copy_run_start
-  tags: logging
+  when: inventory_hostname in groups["cisco"]

@@ -1,0 +1,5 @@
+---
+- name: nftables
+  ansible.builtin.service:
+    name: nftables.service
+    state: restarted

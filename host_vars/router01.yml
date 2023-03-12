@@ -3,6 +3,7 @@
 hostname: RT-C1841
 domain_name: kamiya.local
 
+
 # basic interface configuration
 FE_interfaces:
   - name: FastEthernet0/0
@@ -23,26 +24,33 @@ SE_interfaces:
     description: ""
     enabled: no
 
+
 # L3 interface configuration
 L3_interfaces:
   - name: FastEthernet0/0
     ipv4_address: 192.168.51.2/24
 
+
 # clock configuration - ntp
 ntp_server: 133.243.238.164
 
+
 # archive configuration
 tftp_server: 192.168.51.10
+
 
 # logging configuration
 syslog_server: 192.168.51.10
 syslog_facility: local0
 
+
 # snmp configuration
 snmp_community: public
 
+
 # routing configuration - default route
 next_hop_router: 192.168.51.254
+
 
 # banner configuration - login
 banner_text: |

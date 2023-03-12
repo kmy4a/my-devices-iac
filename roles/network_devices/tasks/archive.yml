@@ -1,5 +1,5 @@
 ---
-- name: archive - tftp
+- name: cisco - archive
   cisco.ios.ios_config:
     lines:
       - "path tftp://{{ tftp_server }}/$h-$t.cfg"
@@ -7,4 +7,4 @@
     parents:
       - archive
   notify: copy_run_start
-  tags: archive
+  when: inventory_hostname in groups["cisco"]

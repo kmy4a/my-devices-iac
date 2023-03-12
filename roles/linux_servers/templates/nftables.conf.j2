@@ -1,0 +1,28 @@
+#!/usr/sbin/nft -f
+
+flush ruleset
+
+table inet filter {
+        chain input {
+                type filter hook input priority 0;
+        }
+        chain forward {
+                type filter hook forward priority filter; policy drop;
+{% for item in ipsec %}
+                iifname "{{ interface }}" ip daddr {{ item.nw }} ct state related,established counter accept;
+                oifname "{{ interface }}" ip saddr {{ item.nw }} ip daddr {{ lan_nw }} counter accept;
+{% endfor %}
+        }
+        chain output {
+                type filter hook output priority 0;
+        }
+}
+
+table inet nat {
+        chain postrouting {
+                type nat hook postrouting priority srcnat; policy accept;
+{% for item in ipsec %}
+                oifname "{{ interface }}" ip saddr {{ item.nw }} counter masquerade;
+{% endfor %}
+        }
+}

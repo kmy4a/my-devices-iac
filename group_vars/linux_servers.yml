@@ -1,0 +1,5 @@
+---
+ansible_user: kamy
+ansible_password: kamy
+ansible_become: yes
+ansible_become_method: sudo

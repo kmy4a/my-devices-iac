@@ -1,0 +1,7 @@
+---
+- ansible.builtin.import_tasks:
+    file: strongswan.yml
+- ansible.builtin.import_tasks:
+    file: nftables.yml
+- ansible.builtin.import_tasks:
+    file: sysctl.yml

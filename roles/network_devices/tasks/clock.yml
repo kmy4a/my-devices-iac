@@ -1,15 +1,15 @@
 ---
-- name: clock - timezone
+- name: cisco - clock - timezone
   cisco.ios.ios_config:
     lines:
       - clock timezone JST 9 0
   notify: copy_run_start
-  tags: clock
+  when: inventory_hostname in groups["cisco"]
 
-- name: clock - ntp
+- name: cisco - clock - ntp
   cisco.ios.ios_ntp:
     server: "{{ ntp_server }}"
     logging: false
     state: present
   notify: copy_run_start
-  tags: clock
+  when: inventory_hostname in groups["cisco"]

@@ -1,0 +1,11 @@
+---
+- name: install - preparation
+  ansible.builtin.apt:
+    update_cache: "True"
+    upgrade: "True"
+    state: present
+
+- name: install - strongswan
+  ansible.builtin.apt:
+    pkg:
+      - strongswan

@@ -1,0 +1,6 @@
+---
+- hosts: linux_servers
+  roles:
+    - role: linux_servers
+      tags: linux_servers
+  ignore_errors: yes
